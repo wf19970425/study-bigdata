@@ -5,7 +5,7 @@ package com.wangfei.shejimoshi.guanchazhemoshi;
  * @create 2022-08-06 16:09
  */
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Subject subject = new Subject();
         subject.add(new CompactionObserver());
         subject.add(new ClusterObserver());
@@ -21,5 +21,13 @@ public class Test {
         subject.setState(26);
         subject.setState(26);
 
+        Thread.sleep(2000);
+        System.out.println("----------------");
+
+        new Thread(() ->{
+            for (int i = 0; i < 10; i++) {
+                subject.setState(5);
+            }
+        }).start();
     }
 }
